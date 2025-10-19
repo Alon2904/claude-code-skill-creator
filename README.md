@@ -1,256 +1,95 @@
 # Claude Code Skill Creator
 
-**Interactive `/create-skill` command for Claude Code** - Automate the creation of custom Claude skills with guided workflows, validation, and packaging.
+Create custom Claude skills with a single command.
 
-## What Is This?
+## What is this?
 
-This tool extends [Anthropic's skill system](https://github.com/anthropics/skills) with an interactive command that automates the entire skill creation process. Instead of manually creating files and following specifications, just run `/create-skill` and let Claude guide you through creating professional, validated skills.
+A Claude Code plugin that adds the `/create-skill` command. Use it to create skills that help Claude understand your project better.
 
-### Key Features
-
-✨ **Interactive Creation** - Guided workflow asks questions and customizes everything for you
-🎯 **Context-Aware** - Works in your projects with full codebase context, or standalone
-📦 **Auto-Validation** - Validates skill structure and packaging automatically
-🔧 **Script Generation** - Creates helper scripts, references, and assets as needed
-📝 **Smart Customization** - Claude writes skill content based on your requirements
-🚀 **Multiple Patterns** - Use as marketplace, project tool, or sandbox
-
-## Quick Start
-
-Choose the pattern that fits your needs:
-
-### For Creating Project-Specific Skills (Recommended ⭐)
-
-Perfect when you want Claude to have full context of YOUR codebase:
+## Install
 
 ```bash
-# Copy the command to your project
-mkdir -p .claude/commands
-curl -o .claude/commands/create-skill.md \
-  https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/claude-code-skill-creator/main/.claude/commands/create-skill.md
+/plugin marketplace add Alon2904/claude-code-skill-creator
+```
 
-# In Claude Code:
+That's it. You now have `/create-skill` available everywhere.
+
+## Usage
+
+### Create a skill for your project (recommended)
+
+Navigate to your project and run the command:
+
+```bash
+cd ~/my-fastapi-project
 /create-skill
 ```
 
-[Full Setup Instructions for Pattern B →](PATTERNS.md#pattern-b-local-project-tool)
+Claude will:
+1. Ask what skill you want
+2. Analyze your project code
+3. Create a skill at `.claude/skills/` in your project
+4. The skill understands YOUR code, YOUR patterns
 
-### For Creating Shareable General-Purpose Skills
-
-Perfect for building a library of reusable skills:
-
-```bash
-# In Claude Code:
-/plugin marketplace add YOUR_GITHUB_USERNAME/claude-code-skill-creator
-/plugin install skill-creator-tool@claude-code-skill-creator
-
-# Then create skills:
+**Example:**
+```
 /create-skill
+> "Create a skill that helps write tests for our FastAPI endpoints"
+
+✅ Skill created at .claude/skills/api-test-helper/
 ```
 
-[Full Setup Instructions for Pattern A →](PATTERNS.md#pattern-a-global-marketplace)
+Now when you ask Claude to write tests, it knows:
+- Your test structure and fixtures
+- Your database models
+- Your API patterns and conventions
+- How to write tests that fit your project
 
-### For Learning and Experimentation
+### Create a skill to share
 
-Perfect for exploring and prototyping:
+Want to create a general-purpose skill to share with others?
 
 ```bash
-git clone --recursive https://github.com/YOUR_GITHUB_USERNAME/claude-code-skill-creator.git
-cd claude-code-skill-creator
-
-# In Claude Code:
+cd ~/any-folder
 /create-skill
+> "JSON validator and formatter"
+
+✅ Skill created and packaged as json-validator.zip
 ```
 
-[Full Setup Instructions for Pattern C →](PATTERNS.md#pattern-c-sandboxlearning)
+Share the .zip with your team or upload to Claude.ai.
 
-## Why Use This Tool?
+## How it works
 
-### Before: Manual Skill Creation
-```bash
-mkdir my-skill
-cd my-skill
-# Create SKILL.md with proper YAML frontmatter
-# Write all instructions manually
-# Create scripts/, references/, assets/ if needed
-# Validate frontmatter format
-# Package as .zip
-# Register in marketplace.json
-```
+**When run in your project:**
+- Skills are created at `.claude/skills/` in your project
+- Claude has full context of your codebase
+- Skills are tailored to your specific code
 
-### After: Automated with `/create-skill`
-```bash
-/create-skill
-> I want a skill for analyzing JSON files
-# Claude creates everything automatically
-✅ Skill created, validated, and packaged!
-```
+**When run elsewhere:**
+- Skills are packaged as .zip files
+- Easy to share and distribute
 
-## What Gets Created?
+## Example
 
-When you run `/create-skill`, you'll get:
+See `examples/json-validator/` for a complete skill example.
 
-📄 **SKILL.md** - Complete skill file with:
-- Proper YAML frontmatter
-- Custom instructions based on your requirements
-- Examples and guidelines
-- Resource documentation
+## What gets created?
 
-🔧 **Helper Scripts** (optional) - Python/Bash scripts for automation
+When you run `/create-skill`, you get:
 
-📚 **Reference Documentation** (optional) - Detailed guides and API docs
-
-🎨 **Asset Files** (optional) - Templates, boilerplate, or resources
-
-📦 **Packaged .zip** - Ready to share or distribute
-
-✅ **Validation** - Automatically checks skill structure
-
-## Usage Patterns
-
-This tool supports three different usage patterns. **Choose the one that fits your needs:**
-
-### Pattern A: Global Marketplace
-Create and share general-purpose skills through a centralized marketplace.
-
-**Best for:** JSON parsers, Git helpers, documentation templates, code formatters
-
-[Learn More →](PATTERNS.md#pattern-a-global-marketplace)
-
-### Pattern B: Local Project Tool ⭐ RECOMMENDED
-Create project-specific skills with full codebase context.
-
-**Best for:** "Analyze our database schema", "Generate our API docs", "Write tests for our endpoints"
-
-**Why powerful:** Claude sees your entire project when creating the skill, so it can reference YOUR specific code, APIs, and patterns.
-
-[Learn More →](PATTERNS.md#pattern-b-local-project-tool)
-
-### Pattern C: Sandbox/Learning
-Clone and experiment in a safe environment.
-
-**Best for:** Learning how skills work, prototyping ideas, exploring examples
-
-[Learn More →](PATTERNS.md#pattern-c-sandboxlearning)
-
-**Not sure which to choose?** Check out our [detailed comparison →](PATTERNS.md#comparison-table)
-
-## Example Skills You Can Create
-
-💡 **Simple instruction-only skills:**
-- Code review best practices
-- Documentation style guide
-- Git workflow helper
-
-🔧 **Script-heavy skills:**
-- Image processing (resize, convert, compress)
-- Database migration generator
-- Log file analyzer
-
-📋 **Template-based skills:**
-- API documentation generator
-- Project scaffolding
-- README templates
-
-🎯 **Project-specific skills:**
-- "Test writer for our FastAPI app"
-- "Migration script generator for our DB schema"
-- "Documentation following our standards"
-
-## How It Works
-
-1. **You run** `/create-skill`
-2. **Claude asks** what you want to create
-3. **Claude generates**:
-   - Skill name (or you provide one)
-   - Complete SKILL.md file
-   - Helper scripts if needed
-   - Reference documentation if needed
-   - Asset files if needed
-4. **Claude validates** the skill structure
-5. **Claude packages** as a .zip file
-6. **Optionally registers** in marketplace.json
-7. **You're done!** ✅
-
-## Documentation
-
-- **[Usage Patterns](PATTERNS.md)** - Detailed guide to all three usage patterns
-- **[Quick Start Guide](QUICKSTART.md)** - Step-by-step setup for each pattern
-- **[Contributing](CONTRIBUTING.md)** - How to contribute to this project
-- **[Examples](examples/)** - Sample skills and workflows
-
-## Requirements
-
-- **Claude Code** - This is a Claude Code plugin/tool
-- **Python 3.7+** - For helper scripts (validation, packaging)
-- **Git** - For cloning the repository (Pattern C)
+- **SKILL.md** - The main skill file with instructions for Claude
+- **scripts/** (optional) - Helper scripts for automation
+- **references/** (optional) - Reference documentation
+- **assets/** (optional) - Templates or boilerplate files
+- **[skill-name].zip** - Packaged skill ready to share
 
 ## Credits
 
-This tool extends and builds upon:
-- [Anthropic's Skills Repository](https://github.com/anthropics/skills) - The official skills collection and specification
-- [Agent Skills Spec](https://github.com/anthropics/skills/blob/main/agent_skills_spec.md) - The skills specification
-- Anthropic's `skill-creator` skill - Provides the init and validation scripts
+Built on [Anthropic's Skills System](https://github.com/anthropics/skills)
 
-**Special thanks to the Anthropic team** for creating the skills system and providing the foundation that makes this tool possible.
-
-## What Makes This Different?
-
-This isn't a fork or replacement of Anthropic's skills repo. Instead, it:
-
-✅ **Extends** the official skills system with automation
-✅ **Uses** Anthropic's scripts and specifications
-✅ **Adds** interactive creation workflow
-✅ **Enables** context-aware skill generation
-✅ **Maintains** compatibility with the official spec
-
-## Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
-- Reporting issues
-- Suggesting improvements
-- Submitting pull requests
-- Code style guidelines
+Uses Anthropic's official skill creation scripts.
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
-
-The Anthropic skills (in the `skills/` submodule) are licensed under Apache 2.0 by Anthropic.
-
-## Support
-
-- 🐛 [Report a bug](https://github.com/YOUR_GITHUB_USERNAME/claude-code-skill-creator/issues/new?template=bug_report.md)
-- 💡 [Request a feature](https://github.com/YOUR_GITHUB_USERNAME/claude-code-skill-creator/issues/new?template=feature_request.md)
-- 📖 [Read the docs](PATTERNS.md)
-- 💬 [Discussions](https://github.com/YOUR_GITHUB_USERNAME/claude-code-skill-creator/discussions)
-
-## Roadmap
-
-- [ ] Add more example skills
-- [ ] Create video tutorials
-- [ ] Support for skill templates
-- [ ] Integration with Claude.ai skill upload
-- [ ] Skill testing framework
-- [ ] Community skill marketplace
-
-## Frequently Asked Questions
-
-**Q: Do I need to fork Anthropic's skills repo?**
-A: No! This tool uses Anthropic's repo as a git submodule. You get official skills + our creation tool.
-
-**Q: Will my skills work with Claude.ai?**
-A: Yes! Skills created with this tool follow the official Agent Skills Spec, so they work everywhere.
-
-**Q: Can I create skills for my team's private projects?**
-A: Yes! Use Pattern B to create project-specific skills. They can be committed to your team's repository.
-
-**Q: How do I update to get new Anthropic skills?**
-A: Run `git submodule update --remote` to pull the latest official skills.
-
-**Q: Can I contribute skills back to Anthropic's repo?**
-A: Yes! Create the skill here, then submit it to their repository following their contribution guidelines.
-
----
-
-**Ready to create your first skill?** → [Choose your pattern](PATTERNS.md) or [Jump to Quick Start](QUICKSTART.md)
+MIT License - see [LICENSE](LICENSE)
