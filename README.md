@@ -84,6 +84,34 @@ When you run `/create-skill`, you get:
 - **assets/** (optional) - Templates or boilerplate files
 - **[skill-name].zip** - Packaged skill ready to share
 
+## Development
+
+Want to contribute or test locally?
+
+See [TESTING.md](TESTING.md) for detailed testing instructions.
+
+### Quick Local Test
+
+```bash
+# Install from local directory
+/plugin add file:///path/to/claude-code-skill-creator
+
+# Test the command
+/create-skill
+```
+
+### Plugin Structure
+
+```
+.claude-plugin/          # Plugin metadata
+  ├── plugin.json        # Plugin manifest
+  └── marketplace.json   # Marketplace listing
+commands/                # Plugin commands
+  └── create-skill.md    # The /create-skill command
+skills/                  # Supporting files
+  └── skill-creator/     # Anthropic's skill creation scripts
+```
+
 ## Credits
 
 Built on [Anthropic's Skills System](https://github.com/anthropics/skills)
