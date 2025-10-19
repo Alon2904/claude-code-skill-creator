@@ -1,0 +1,6 @@
+{
+  "name": "claude-code-skill-creator",
+  "version": "1.0.0",
+  "description": "Create custom Claude skills with a single command. Analyze your project and create tailored skills that understand your code patterns.",
+  "author": "Alon2904"
+}

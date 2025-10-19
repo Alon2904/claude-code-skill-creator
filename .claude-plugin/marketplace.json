@@ -1,0 +1,16 @@
+{
+  "name": "Claude Code Skill Creator",
+  "owner": {
+    "name": "Alon Cohen",
+    "email": "acohenstore@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-code-skill-creator",
+      "source": ".",
+      "description": "Create custom Claude skills with a single command. Analyze your project and create tailored skills that understand your code patterns.",
+      "version": "1.0.0",
+      "author": "Alon Cohen"
+    }
+  ]
+}
