@@ -1,0 +1,53 @@
+# Serena local cache and memories
+.serena/
+
+# User-created custom skills (gitignored, users create their own)
+skills/custom/*
+!skills/custom/.gitkeep
+!skills/custom/README.md
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Packaged skills
+*.zip
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Example custom skills in examples/ directory
+examples/**/skills/custom/*
+!examples/**/skills/custom/.gitkeep
+
+# Temporary files
+tmp/
+temp/
+*.tmp
