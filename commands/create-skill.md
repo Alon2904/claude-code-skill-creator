@@ -1,3 +1,7 @@
+---
+description: Create custom Claude skills with guided workflow
+---
+
 # Create Skill Command
 
 Automates the creation of custom Claude skills with guided workflows.
